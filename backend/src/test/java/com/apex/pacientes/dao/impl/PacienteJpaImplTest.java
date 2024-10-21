@@ -38,6 +38,7 @@ class PacienteJpaImplTest {
 
     @Test
     void excluir() {
+
         Long id = 1L;
 
         underTest.excluir(id);
