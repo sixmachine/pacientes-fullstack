@@ -37,7 +37,6 @@ public class PacienteService {
         dao.excluir(id);
     }
 
-
     public PacienteDTO adicionar(final PacienteRequest novoPaciente) {
 
         verificaEmailCadastrado(novoPaciente.getEmail());
