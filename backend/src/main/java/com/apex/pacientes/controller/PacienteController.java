@@ -44,4 +44,9 @@ public class PacienteController {
         return ResponseEntity.ok(service.atualizar(id, request));
     }
 
+    @GetMapping("/teste")
+    public String teste(){
+        return "Testando 123";
+    }
+
 }

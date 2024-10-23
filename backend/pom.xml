@@ -13,10 +13,6 @@
     <version>1.0.0</version>
     <name>pacientes</name>
     <description>pacientes</description>
-    <organization>
-        <name>apex</name>
-        <url>https://apex.com.br</url>
-    </organization>
 
     <url/>
     <licenses>
@@ -35,6 +31,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <docker.username>sixmachine</docker.username>
+        <docker.image.name>pacientes-api</docker.image.name>
+        <docker.image.tag/>
     </properties>
     <dependencies>
 
@@ -221,7 +219,7 @@
                         </platforms>
                     </from>
                     <to>
-                        <image>registry.hub.docker.com/${docker.username}/${project.artifactId}:${project.version}</image>
+                        <image>registry.hub.docker.com/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>
