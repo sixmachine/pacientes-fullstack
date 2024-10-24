@@ -34,6 +34,8 @@ jobs:
         working-directory: ./backend
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -75,11 +77,19 @@ jobs:
           git reset --hard origin/main
       - name: Commit and Push Dockerrun.aws.json
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token automático do GitHub
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/***/pacientes-fullstack.git main          
+          
+          # Faz o fetch para garantir que estamos cientes das mudanças remotas
+          git fetch origin main
+          
+          # Aplica o rebase nas alterações remotas
+          git rebase origin/main
+
           git add .
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
+          
+          # Realiza o push das alterações
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/***/pacientes-fullstack.git
