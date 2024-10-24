@@ -82,14 +82,12 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           
-          # Faz o fetch para garantir que estamos cientes das mudanças remotas
+          # Faz o fetch e rebase das alterações remotas
           git fetch origin main
-          
-          # Aplica o rebase nas alterações remotas
-          git rebase origin/main
+          git rebase origin/main || true  # Não falha se houver conflito
 
           git add .
-          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
-          
-          # Realiza o push das alterações
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/***/pacientes-fullstack.git
+          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}" || echo "No changes to commit"
+
+          # Força o push das alterações
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/***/pacientes-fullstack.git
