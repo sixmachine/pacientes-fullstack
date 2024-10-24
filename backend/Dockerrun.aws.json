@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "pacientes-api",
-      "image": "sixmachine/pacientes-api:latest",
+      "image": "sixmachine/pacientes-api:24.10.2024.01.28.17",
       "essential": true,
       "memory": 512,
       "portMappings": [
